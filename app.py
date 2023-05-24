@@ -35,7 +35,7 @@ def get_price(message: telebot.types.Message):
         values = message.text.split(' ')
 
         if len(values) != 3:
-            raise APIException('Ты ввел много данных! Для расчета мне необходимо лишь 3 значения!')
+            raise APIException('Ты ввел много данных! Для расчета мне необходимо 3 значения! Ни больше, ни меньше!')
 
         base, quote, amount = values
         total_base = CurrencyCalculator.get_price(base, quote, amount)
