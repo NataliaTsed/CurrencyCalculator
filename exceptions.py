@@ -15,8 +15,6 @@ class CurrencyCalculator:
         if base == quote:
             raise APIException(f'Введите различные валюты: {quote}.')
         # quote_ticker, base_ticker = keys[quote], keys[base]
-#        if quote == float(quote) or base == float(quote):
-#            raise APIException("В названии валют цифр нет! ;-) ")
         try:
             base_ticker = keys[base]
         except KeyError:
