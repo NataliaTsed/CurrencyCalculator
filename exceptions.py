@@ -15,22 +15,23 @@ class CurrencyCalculator:
         if base == quote:
             raise APIException(f'Введите различные валюты: {quote}.')
         # quote_ticker, base_ticker = keys[quote], keys[base]
+        if float(amount) == 0:
+            raise APIException('Введите сумму больше нуля! Иначе я не смогу Вам помочь! :-)')
         if float(amount) <= 0:
-            raise APIException('Введите сумму больше нуля.')
+            raise APIException('Введите положительное количество! В кредит не меняем! :-)')
 
         try:
             base_ticker = keys[base]
         except KeyError:
-            raise APIException(f'Не удалось обработать валюту {base}')
+            raise APIException(f'Введено некорректное название валюты {base}! Мне такая валюта не известна!')
         try:
             quote_ticker = keys[quote]
         except KeyError:
-            raise APIException(f'Не удалось обработать валюту {quote}')
+            raise APIException(f'Введено некорректное название валюты {quote}! Выберите валюту из /values')
         try:
             amount = float(amount)
-
         except ValueError:
-            raise APIException(f'Не удалось обработать количество {amount}')
+            raise APIException(f'Не удалось обработать количество {amount}! Вводите только цифры!')
 
         r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}')
         total_base = json.loads(r.content)[keys[base]]

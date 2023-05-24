@@ -7,19 +7,19 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
 def start(message: telebot.types.Message):
-    text = 'Для начала работы Вам необходимо ввести данные через пробел в следующем формате:' \
-           ' \n1) Название валюты, цену которой Вы хотите узнать;  \n2) Название валюты, в которой Вы хотите узнать ' \
-           'цену первой валюты; \n3) Количество первой валюты.\n ' \
-           'Пример ввода: доллар евро 1 \n\
- Список доступных валют: /values'
+    text = 'Для начала работы Вам необходимо ввести данные через пробел в следующем формате: \n' \
+        ' \n1) Название валюты, цену которой Вы хотите узнать;  \n2) Название валюты, в которой Вы хотите узнать ' \
+           'цену первой валюты; \n3) Количество первой валюты.\n' \
+           '\nПример ввода конверсии 100 долларов в евро: доллар евро 100 \n\
+ \nСписок доступных валют: /values'
 
-    bot.send_message(message.chat.id, "Дорогой пользователь! \nДобро пожаловать в лучший валютный конвертер!")
+    bot.send_message(message.chat.id, "Дорогой пользователь! \nДобро пожаловать в лучший валютный конвертер! :-)")
     bot.reply_to(message, text)
 
 
 @bot.message_handler(commands=['values'])
 def values_def(message: telebot.types.Message):
-    text = 'Доступные валюты:'
+    text = 'Вам доступны следующие валюты:'
     for key in keys.keys():
         text = '\n'.join((text, key,))
     bot.reply_to(message, text)
@@ -37,8 +37,6 @@ def get_price(message: telebot.types.Message):
 
         base, quote, amount = values
         total_base = CurrencyCalculator.get_price(base, quote, amount)
-#        text = f'Цена {amount} {base} в {quote}: {total_base}'
-#        bot.send_message(message.chat.id, text)
 
     except APIException as e:
         bot.reply_to(message, f'Ошибка пользователя. \n{e}')
@@ -46,7 +44,7 @@ def get_price(message: telebot.types.Message):
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду\n{e}')
     else:
-        text = f'Стоимость {amount} {base} в {quote}: {total_base}'
+        text = f'Стоимость {amount} {base} в {quote}: {round(float(amount) / float(total_base), 2)}'
         bot.send_message(message.chat.id, text)
 
 
