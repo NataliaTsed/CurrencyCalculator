@@ -27,8 +27,6 @@ class CurrencyCalculator:
             quote_ticker = keys[quote]
         except KeyError:
             raise APIException(f'Введено некорректное название валюты {quote}! Выберите валюту из /values')
-#        except ValueError:
-#            raise APIException("В названии валют цифр нет! ;-) ")
         try:
             amount = float(amount)
         except ValueError:
