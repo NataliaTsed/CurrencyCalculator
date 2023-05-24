@@ -37,6 +37,11 @@ def get_price(message: telebot.types.Message):
 
         base, quote, amount = values
         total_base = CurrencyCalculator.get_price(base, quote, amount)
+        if float(amount)\
+                == 0:
+            raise APIException('Введите сумму больше нуля! Иначе я не смогу Вам помочь! :-)')
+        if float(amount) <= 0:
+            raise APIException('Введите положительное количество! В кредит не меняем! :-)')
 
     except APIException as e:
         bot.reply_to(message, f'Ошибка пользователя. \n{e}')
