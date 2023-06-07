@@ -1,4 +1,9 @@
 # CurrencyCalculator
-The bot  called "Exchange of currency" will do all of the calculations to provide an up-to-date exchange rate. This online currency converter  supports the major world currencies (USD,EUR,RUB) with latest exchange rates.
 Bot name:Exchange of currency
 Username: CurrencyCalculator2023Bot
+
+Бот возвращает цену на определённое количество валюты (евро, доллар или рубль). 
+Человек должен отправить сообщение боту в виде <имя валюты цену которой он хочет узнать> <имя валюты в которой надо узнать цену первой валюты> <количество первой валюты>. 
+При вводе команды /start пользователю выводятся инструкции по применению бота. 
+При вводе команды /values должна выводиться информация о всех доступных валютах в читаемом виде. 
+При ошибке пользователя (например, введена неправильная или несуществующая валюта или неправильно введено число) вызывается исключение APIException с текстом пояснения ошибки. Текст любой ошибки с указанием типа ошибки отправляется пользователю в сообщения.
